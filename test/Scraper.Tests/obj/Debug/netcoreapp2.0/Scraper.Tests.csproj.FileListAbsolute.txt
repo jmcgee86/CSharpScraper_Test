@@ -1,0 +1,17 @@
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/xunit.runner.reporters.netcoreapp10.dll
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/xunit.runner.utility.netcoreapp10.dll
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/Scraper.Tests.deps.json
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/Scraper.Tests.runtimeconfig.json
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/Scraper.Tests.runtimeconfig.dev.json
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/Scraper.Tests.dll
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/Scraper.Tests.pdb
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/Scraper.ClassLib.dll
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/bin/Debug/netcoreapp2.0/Scraper.ClassLib.pdb
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/obj/Debug/netcoreapp2.0/Scraper.Tests.csprojResolveAssemblyReference.cache
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/obj/Debug/netcoreapp2.0/Scraper.Tests.csproj.CoreCompileInputs.cache
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/obj/Debug/netcoreapp2.0/Scraper.Tests.AssemblyInfoInputs.cache
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/obj/Debug/netcoreapp2.0/Scraper.Tests.AssemblyInfo.cs
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/obj/Debug/netcoreapp2.0/Scraper.Tests.csproj.CopyComplete
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/obj/Debug/netcoreapp2.0/Scraper.Tests.dll
+/Users/jmcgee/Documents/CSharpScraper/test/Scraper.Tests/obj/Debug/netcoreapp2.0/Scraper.Tests.pdb

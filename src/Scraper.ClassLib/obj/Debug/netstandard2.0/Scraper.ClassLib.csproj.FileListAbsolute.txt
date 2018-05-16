@@ -1,0 +1,9 @@
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/bin/Debug/netstandard2.0/Scraper.ClassLib.deps.json
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/bin/Debug/netstandard2.0/Scraper.ClassLib.dll
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/bin/Debug/netstandard2.0/Scraper.ClassLib.pdb
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/obj/Debug/netstandard2.0/Scraper.ClassLib.csproj.CoreCompileInputs.cache
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/obj/Debug/netstandard2.0/Scraper.ClassLib.AssemblyInfoInputs.cache
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/obj/Debug/netstandard2.0/Scraper.ClassLib.AssemblyInfo.cs
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/obj/Debug/netstandard2.0/Scraper.ClassLib.dll
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/obj/Debug/netstandard2.0/Scraper.ClassLib.pdb
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.ClassLib/obj/Debug/netstandard2.0/Scraper.ClassLib.csprojResolveAssemblyReference.cache

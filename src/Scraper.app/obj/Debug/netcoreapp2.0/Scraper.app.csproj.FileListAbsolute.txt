@@ -1,0 +1,15 @@
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/Scraper.app.deps.json
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/Scraper.app.runtimeconfig.json
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/Scraper.app.runtimeconfig.dev.json
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/Scraper.app.dll
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/Scraper.app.pdb
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/Scraper.ClassLib.dll
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/Scraper.ClassLib.pdb
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/obj/Debug/netcoreapp2.0/Scraper.app.csproj.CoreCompileInputs.cache
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/obj/Debug/netcoreapp2.0/Scraper.app.AssemblyInfoInputs.cache
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/obj/Debug/netcoreapp2.0/Scraper.app.AssemblyInfo.cs
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/obj/Debug/netcoreapp2.0/Scraper.app.csproj.CopyComplete
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/obj/Debug/netcoreapp2.0/Scraper.app.dll
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/obj/Debug/netcoreapp2.0/Scraper.app.pdb
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/chromedriver
+/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/obj/Debug/netcoreapp2.0/Scraper.app.csprojResolveAssemblyReference.cache

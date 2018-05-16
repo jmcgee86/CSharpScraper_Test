@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Scraper.ClassLib\Scraper.ClassLib.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Selenium.WebDriver" Version="3.12.0"/>
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.38.0.1"/>
+    <PackageReference Include="Selenium.Chrome.WebDriver" Version="2.38.0"/>
+    <PackageReference Include="Selenium.Support" Version="3.12.0"/>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0"/>
+  </ItemGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <PublishChromeDriver>true</PublishChromeDriver>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+</Project>

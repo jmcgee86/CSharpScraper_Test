@@ -17,11 +17,10 @@ namespace Scraper.app
 
             using (var driver = new ChromeDriver("/Users/jmcgee/Documents/CSharpScraper/src/Scraper.app/bin/Debug/netcoreapp2.0/", options))
             {
+                var privateKeys = new PrivateKeys();
                 driver.Navigate().GoToUrl("https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F");
-                // Get the page elements
                 var userNameField = driver.FindElementById("login-username");
-                System.Console.WriteLine("Enter finance email: ");
-                var userName = Console.ReadLine();
+                var userName = privateKeys.Email;
                 userNameField.SendKeys(userName);
 
                 var nextButton = driver.FindElementById("login-signin");
@@ -31,8 +30,7 @@ namespace Scraper.app
                 var element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("login-passwd")));
 
                 var userPasswordField = driver.FindElementById("login-passwd");
-                System.Console.WriteLine("Enter finance password: ");
-                var password = Console.ReadLine();
+                var password = privateKeys.Password;
                 userPasswordField.SendKeys(password);
 
                 var loginButton = driver.FindElementById("login-signin");

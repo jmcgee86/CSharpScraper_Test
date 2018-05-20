@@ -3,8 +3,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
-using System.Text;
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Text; 
+using System.Threading.Tasks; 
 using System.Drawing;
+using Microsoft.EntityFrameworkCore;
 
 namespace Scraper.app
 {
@@ -14,7 +18,7 @@ namespace Scraper.app
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArguments("--incognito");
-            //options.AddArguments("--headless");
+            options.AddArguments("--headless");
 
             using (var driver = new ChromeDriver("bin/Debug/netcoreapp2.0/", options))
             {
@@ -31,7 +35,6 @@ namespace Scraper.app
 
                 var loginAvailable = wait.Until(d => d.FindElement(By.Id("login-passwd")));
 
-
                 var userPasswordField = driver.FindElementById("login-passwd");
                 var password = keys.Password;
                 userPasswordField.SendKeys(password);
@@ -39,17 +42,99 @@ namespace Scraper.app
                 var loginButton = driver.FindElementById("login-signin");
                 loginButton.Click();
 
-                driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
+             // wait.Until(d => d.Url.StartsWith("https://finance.yahoo.com", StringComparison.OrdinalIgnoreCase));
+
+
+               driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
                                     
                 wait.Until(d => d.FindElement(By.Id("__dialog")));
 
                 var closePopup = driver.FindElement(By.XPath("//dialog[@id = '__dialog']/section/button"));
                 closePopup.Click();
                 
-                var result = driver.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table/tbody[2]/tr/td[1]/span/span/a").Text;
+                //var result = driver.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table/tbody[2]/tr/td[1]/span/span/a").Text;
 
-                File.WriteAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", result);
-            }
-        }
-    }
+                			// xpath of html table
+			var elemTable =	driver.FindElement(By.XPath("//*[@id=\"main\"]/section/section[2]/div[2]/table"));
+
+			// Fetch all Row of the table
+			List<IWebElement> lstTrElem = new List<IWebElement>(elemTable.FindElements(By.TagName("tr")));
+			String strRowData = "";
+            List<string> rowData = new List<string>();
+
+			// Traverse each row
+			foreach (var elemTr in lstTrElem)
+			{
+				// Fetch the columns from a particuler row
+				List<IWebElement> lstTdElem = new List<IWebElement>(elemTr.FindElements(By.TagName("td")));
+				if (lstTdElem.Count > 0)
+				{
+					// Traverse each column
+					foreach (var elemTd in lstTdElem)
+					{
+						// "\t\t" is used for Tab Space between two Text
+						//strRowData = strRowData + elemTd.Text + "\t\t";
+                        rowData.Add(elemTd.Text);
+                        //File.WriteAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", strRowData + "\n");
+                        // File.AppendAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", strRowData);
+
+					}
+				}
+				// else
+				// {
+				// 	// To print the data into the console
+				// 	Console.WriteLine("This is the end");
+				// 	//Console.WriteLine(lstTrElem[0].Text.Replace(" ", "\t\t"));
+				// }
+				//Console.WriteLine(strRowData);
+				strRowData = String.Empty;
+                foreach (var col in rowData)
+                {
+                File.AppendAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", col + "\n");
+                }
+                File.AppendAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", "\n"+"\n");
+                rowData.Clear();
+			}
+			// Console.WriteLine("");
+			driver.Quit();
+		}
+	}
 }
+                
+
+
+
+
+
+
+               // File.WriteAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", result);
+
+
+
+
+        //         using (var db = new StockInfoContext()) 
+        // { 
+        //     // Create and save a new Blog 
+        //     //Console.Write("Enter a name for a new Blog: "); 
+        //     //var name = Console.ReadLine(); 
+ 
+        //     var snapshot = new StockInfo(); 
+        //     db.Stocks.Add(snapshot); 
+        //     db.SaveChanges(); 
+ 
+        //     // Display all Blogs from the database 
+        //     var query = from b in db.Stocks 
+        //                 orderby b.Id
+        //                 select b; 
+ 
+        //     Console.WriteLine("All stocks in the database:"); 
+        //     foreach (var item in query) 
+        //     { 
+        //         Console.WriteLine(item.Id); 
+        //     } 
+ 
+        //     Console.WriteLine("Press any key to exit..."); 
+        //     Console.ReadKey(); 
+        //     }
+}
+

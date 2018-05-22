@@ -9,7 +9,7 @@ using Scraper.app;
 namespace Scraper.app.Migrations
 {
     [DbContext(typeof(PortfolioContext))]
-    [Migration("20180522010419_InitialCreate")]
+    [Migration("20180522184956_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

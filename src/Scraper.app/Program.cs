@@ -45,9 +45,6 @@ namespace Scraper.app
                 var loginButton = driver.FindElementById("login-signin");
                 loginButton.Click();
 
-             // wait.Until(d => d.Url.StartsWith("https://finance.yahoo.com", StringComparison.OrdinalIgnoreCase));
-
-
                driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
                                     
                 wait.Until(d => d.FindElement(By.Id("__dialog")));
@@ -57,17 +54,27 @@ namespace Scraper.app
 
 
             var netWorth = driver.FindElement(By.XPath("//*[@id=\"main\"]/section/header/div/div[1]/div/div[2]/p[1]")).Text;
-           // netWorth.Remove(0,1);
-            //netWorth.Replace(",", String.Empty);
-            //snapshot.NetWorth = double.Parse(netWorth, CultureInfo.InvariantCulture);
+            //returns day gain and day gain percentage in string, need to split and parse before adding data 
+                //ex: -10,029.00 (-0.64%)
+            string[] dayGain = driver.FindElement(By.XPath("//*[@id=\"main\"]/section/header/div/div[1]/div/div[2]/p[2]/span")).Text.Split(" ");
+            // returns total gain and totoal gain percentage in string, need to split and parse before adding data
+                //ex: -10,029.00 (-0.64%)
+            string [] totalGain = driver.FindElement(By.XPath("//*[@id=\"main\"]/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
+           
             snapshot.NetWorth = double.Parse(netWorth, NumberStyles.Currency);
             snapshot.DatePulled = DateTime.Now;
-            snapshot.DayGain = 5;
-            snapshot.DayGainPercentage = 4.1;
-            snapshot.TotalGain = 3;
-            snapshot.TotalGainPercentage = 4;
-                
-                //var result = driver.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table/tbody[2]/tr/td[1]/span/span/a").Text;
+            snapshot.DayGain = double.Parse(dayGain[0]);
+            snapshot.DayGainPercentage = double.Parse(dayGain[1].TrimStart(new char []{' ', '('}).TrimEnd(new char [] {'%', ' ', ')'}))/100;
+            snapshot.TotalGain = double.Parse(totalGain[0]);
+            snapshot.TotalGainPercentage = double.Parse(totalGain[1].TrimStart(new char []{' ', '('}).TrimEnd(new char [] {'%', ' ', ')'}))/100;
+
+            //List<StockInfo> stockDataList = new List<StockInfo>();
+
+            //var stockInfo = new StockInfo();
+
+            //stockDataList.Add(stockInfo); // at end of each iteration through the data table, add info for individual stock to list
+
+            //snapshot.Stocks = stockDataList; //after all iterations, add data to snapshot before adding to db
 
                 			// xpath of html table
 			var elemTable =	driver.FindElement(By.XPath("//*[@id=\"main\"]/section/section[2]/div[2]/table"));

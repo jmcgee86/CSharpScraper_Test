@@ -16,6 +16,7 @@
 
   </ItemGroup>
   <PropertyGroup>
+      <OutputType>Exe</OutputType>
     <PublishChromeDriver>true</PublishChromeDriver>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>

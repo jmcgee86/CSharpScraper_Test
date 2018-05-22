@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks; 
 using System.Drawing;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace Scraper.app
 {
@@ -16,9 +17,11 @@ namespace Scraper.app
     {
         static void Main(string[] args)
         {
+            var snapshot = new PortfolioInfo();
+
             ChromeOptions options = new ChromeOptions();
             options.AddArguments("--incognito");
-            options.AddArguments("--headless");
+           // options.AddArguments("--headless");
 
             using (var driver = new ChromeDriver("bin/Debug/netcoreapp2.0/", options))
             {
@@ -51,6 +54,18 @@ namespace Scraper.app
 
                 var closePopup = driver.FindElement(By.XPath("//dialog[@id = '__dialog']/section/button"));
                 closePopup.Click();
+
+
+            var netWorth = driver.FindElement(By.XPath("//*[@id=\"main\"]/section/header/div/div[1]/div/div[2]/p[1]")).Text;
+           // netWorth.Remove(0,1);
+            //netWorth.Replace(",", String.Empty);
+            //snapshot.NetWorth = double.Parse(netWorth, CultureInfo.InvariantCulture);
+            snapshot.NetWorth = double.Parse(netWorth, NumberStyles.Currency);
+            snapshot.DatePulled = DateTime.Now;
+            snapshot.DayGain = 5;
+            snapshot.DayGainPercentage = 4.1;
+            snapshot.TotalGain = 3;
+            snapshot.TotalGainPercentage = 4;
                 
                 //var result = driver.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table/tbody[2]/tr/td[1]/span/span/a").Text;
 
@@ -97,6 +112,17 @@ namespace Scraper.app
 			}
 			// Console.WriteLine("");
 			driver.Quit();
+
+
+            using (var db = new PortfolioContext())
+            {
+                db.Add(snapshot);
+                var count = db.SaveChanges();
+                foreach (var portfolio in db.Portfolio)
+                {
+                    System.Console.WriteLine(portfolio.NetWorth);
+                }
+            }
 		}
 	}
 }

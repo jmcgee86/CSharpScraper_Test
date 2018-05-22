@@ -2,6 +2,8 @@ namespace Scraper.app
 {
     public class StockInfo
     {
+        public int StocksId { get; set;}
+
         public string StockSymbol { get; set; }
         public double CurrentPrice { get; set; }
         public double PriceChange { get; set; }
@@ -15,9 +17,8 @@ namespace Scraper.app
         public double TotalGainPercentage { get; set; }
         public int Lots { get; set; }
         public string Notes { get; set; }
-
+        public int Id { get; set; }
         public virtual PortfolioInfo PortfolioInfo { get; set;}
-        public int Id { get; set;}
 
     }
 }

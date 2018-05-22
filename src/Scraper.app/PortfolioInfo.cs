@@ -4,6 +4,8 @@ namespace Scraper.app
 {
     public class PortfolioInfo
     {
+        public int Id { get; set; }
+
         public DateTime DatePulled { get; set; }
         public Double NetWorth { get; set; }
         public Double DayGain{ get; set; }
@@ -12,7 +14,6 @@ namespace Scraper.app
         public Double TotalGainPercentage{ get; set; }
 
         public virtual List<StockInfo> Stocks { get; set; }
-        public int Id { get; set; }
 
         
     }

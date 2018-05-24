@@ -54,13 +54,8 @@ namespace Scraper.app
 
 
             var netWorth = driver.FindElement(By.XPath("//*[@id=\"main\"]/section/header/div/div[1]/div/div[2]/p[1]")).Text;
-            //returns day gain and day gain percentage in string, need to split and parse before adding data 
-                //ex: -10,029.00 (-0.64%)
             string[] dayGain = driver.FindElement(By.XPath("//*[@id=\"main\"]/section/header/div/div[1]/div/div[2]/p[2]/span")).Text.Split(" ");
-            // returns total gain and totoal gain percentage in string, need to split and parse before adding data
-                //ex: -10,029.00 (-0.64%)
             string [] totalGain = driver.FindElement(By.XPath("//*[@id=\"main\"]/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
-           
             snapshot.NetWorth = double.Parse(netWorth, NumberStyles.Currency);
             snapshot.DatePulled = DateTime.Now;
             snapshot.DayGain = double.Parse(dayGain[0]);
@@ -68,58 +63,55 @@ namespace Scraper.app
             snapshot.TotalGain = double.Parse(totalGain[0]);
             snapshot.TotalGainPercentage = double.Parse(totalGain[1].TrimStart(new char []{' ', '('}).TrimEnd(new char [] {'%', ' ', ')'}))/100;
 
-            //List<StockInfo> stockDataList = new List<StockInfo>();
+            List<StockInfo> stockDataList = new List<StockInfo>();
 
-            //var stockInfo = new StockInfo();
+            // xpath of html table
+			var table =	driver.FindElement(By.XPath("//*[@id=\"main\"]/section/section[2]/div[2]/table"));
 
-            //stockDataList.Add(stockInfo); // at end of each iteration through the data table, add info for individual stock to list
-
-            //snapshot.Stocks = stockDataList; //after all iterations, add data to snapshot before adding to db
-
-                			// xpath of html table
-			var elemTable =	driver.FindElement(By.XPath("//*[@id=\"main\"]/section/section[2]/div[2]/table"));
-
-			// Fetch all Row of the table
-			List<IWebElement> lstTrElem = new List<IWebElement>(elemTable.FindElements(By.TagName("tr")));
-			String strRowData = "";
-            List<string> rowData = new List<string>();
-
+			// Fetch all Rows of the table
+			List<IWebElement> tableRows = new List<IWebElement>(table.FindElements(By.TagName("tr")));
+            List<string> rowDataList = new List<string>();
 			// Traverse each row
-			foreach (var elemTr in lstTrElem)
+			foreach (var row in tableRows)
 			{
 				// Fetch the columns from a particuler row
-				List<IWebElement> lstTdElem = new List<IWebElement>(elemTr.FindElements(By.TagName("td")));
-				if (lstTdElem.Count > 0)
+				List<IWebElement> colsInRow = new List<IWebElement>(row.FindElements(By.TagName("td")));
+				if (colsInRow.Count > 0)
 				{
-					// Traverse each column
-					foreach (var elemTd in lstTdElem)
+					// Traverse each column and add to rowDataList
+					foreach (var col in colsInRow)
 					{
-						// "\t\t" is used for Tab Space between two Text
-						//strRowData = strRowData + elemTd.Text + "\t\t";
-                        rowData.Add(elemTd.Text);
-                        //File.WriteAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", strRowData + "\n");
-                        // File.AppendAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", strRowData);
-
+                        rowDataList.Add(col.Text);
 					}
-				}
-				// else
-				// {
-				// 	// To print the data into the console
-				// 	Console.WriteLine("This is the end");
-				// 	//Console.WriteLine(lstTrElem[0].Text.Replace(" ", "\t\t"));
-				// }
-				//Console.WriteLine(strRowData);
-				strRowData = String.Empty;
-                foreach (var col in rowData)
+                
+                string [] colOne = rowDataList[0].ToString().Split("\n");
+                string [] colTwo = rowDataList[1].ToString().Split("\n");
+                string [] colSix = rowDataList[5].ToString().Split("\n");
+                string [] colSeven = rowDataList[6].ToString().Split("\n");
+                string [] colEight = rowDataList[7].ToString().Split(" ");
+
+                stockDataList.Add(new StockInfo()
                 {
-                File.AppendAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", col + "\n");
-                }
-                File.AppendAllText("/Users/jmcgee/Documents/CSharpScraper/result.txt", "\n"+"\n");
-                rowData.Clear();
+                    StockSymbol = colOne[0].ToString(),
+                    CurrentPrice = double.Parse(colOne[1].ToString()),
+                    PriceChange = double.Parse(colTwo[1]),
+                    PriceChangePercentage = double.Parse((colTwo[0]).TrimEnd(new char [] {'%', ' ', ')'}))/100,
+                    Shares = double.Parse(rowDataList[2].ToString()),
+                    CostBasis = double.Parse(rowDataList[3].ToString()),
+                    MarketValue = double.Parse(rowDataList[4].ToString()),
+                    DayGain = double.Parse(colSix[1]),
+                    DayGainPercentage = double.Parse((colSix[0]).TrimEnd(new char [] {'%', ' ', ')'}))/100,
+                    TotalGain = double.Parse(colSeven[1]),
+                    TotalGainPercentage = double.Parse((colSeven[0]).TrimEnd(new char [] {'%', ' ', ')'}))/100,
+                    Lots = int.Parse(colEight[0]),
+                    Notes = rowDataList[8]
+                });
+                rowDataList.Clear();
+				}
 			}
-			// Console.WriteLine("");
 			driver.Quit();
 
+        snapshot.Stocks = stockDataList;
 
             using (var db = new PortfolioContext())
             {
@@ -170,4 +162,3 @@ namespace Scraper.app
         //     Console.ReadKey(); 
         //     }
 }
-
